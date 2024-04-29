@@ -33,6 +33,7 @@ Build with the [Meltano Target SDK](https://sdk.meltano.com).
     "prefix": "path/to/output",
     "stream_name_path_override": "StreamName",
     "include_process_date": true|false,
+    "extract_document": true|false,
     "append_date_to_prefix": true|false,
     "partition_name_enabled": true|false,
     "use_raw_stream_name": true|false,
