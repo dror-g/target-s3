@@ -103,6 +103,9 @@ class FormatBase(metaclass=ABCMeta):
         """Execute record prep. (default)"""
         if self.config.get("include_process_date", None):
             self.records = self.append_process_date(self.records)
+        """Get "document field to top of record, removing other fields."""
+        if self.config.get("extract_document", None):
+            self.records = self.extract_document(self.records)
 
     def create_key(self) -> str:
         batch_start = self.context["batch_start_time"]
@@ -189,3 +192,12 @@ class FormatBase(metaclass=ABCMeta):
             return record
 
         return list(map(lambda x: process_date(x), records))
+
+    def extract_document(self, records) -> dict:           
+        """A function that leves only "document" field in every record"""            
+
+        def clean_record(record):            
+            record = record["document"]                                                                                                                                               
+            return record                                                                                                                                                             
+
+        return list(map(lambda x: clean_record(x), records))
